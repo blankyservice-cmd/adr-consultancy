@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-heading);
+
+  /* ADR Brand Colors */
+  --color-navy: #1F4E78;
+  --color-navy-dark: #152F4A;
+  --color-navy-light: #2A6A9E;
+  --color-blue: #4A90E2;
+  --color-blue-light: #6AABF0;
+  --color-gold: #D4A574;
+  --color-gold-light: #E8C9A8;
+  --color-gold-dark: #B8884F;
+  --color-charcoal: #2D2D2D;
+  --color-light-bg: #F5F5F5;
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #2D2D2D;
+  --card: #FFFFFF;
+  --card-foreground: #2D2D2D;
+  --popover: #FFFFFF;
+  --popover-foreground: #2D2D2D;
+  --primary: #1F4E78;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5F5F5;
+  --secondary-foreground: #1F4E78;
+  --muted: #F5F5F5;
+  --muted-foreground: #6B7280;
+  --accent: #D4A574;
+  --accent-foreground: #1F4E78;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #4A90E2;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-gradient-blue {
+    background: linear-gradient(135deg, #4A90E2, #1F4E78);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #D4A574, #B8884F);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .bg-navy-gradient {
+    background: linear-gradient(135deg, #1F4E78 0%, #152F4A 50%, #0D1F33 100%);
+  }
+  .shadow-navy {
+    box-shadow: 0 4px 14px -2px rgba(31, 78, 120, 0.15), 0 2px 6px -1px rgba(31, 78, 120, 0.08);
+  }
+  .shadow-gold {
+    box-shadow: 0 4px 14px -2px rgba(212, 165, 116, 0.2), 0 2px 6px -1px rgba(212, 165, 116, 0.1);
+  }
+}
