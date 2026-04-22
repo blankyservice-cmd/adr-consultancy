@@ -60,7 +60,8 @@ export function Testimonials() {
                 delay: i * 0.1,
                 ease: [0.4, 0, 0.2, 1],
               }}
-              className="relative bg-light-bg rounded-xl p-8"
+              whileHover={{ y: -4 }}
+              className="relative bg-light-bg rounded-xl p-8 transition-shadow duration-300 hover:shadow-lg"
             >
               <Quote
                 size={24}

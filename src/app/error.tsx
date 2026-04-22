@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -20,10 +21,20 @@ export default function Error({
       </nav>
 
       <div className="flex-1 flex items-center justify-center px-6">
-        <div className="text-center max-w-md">
-          <p className="text-5xl font-bold text-navy/10 font-[family-name:var(--font-heading)]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          className="text-center max-w-md"
+        >
+          <motion.p
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-5xl font-bold text-navy/10 font-[family-name:var(--font-heading)]"
+          >
             Error
-          </p>
+          </motion.p>
           <h1 className="mt-4 font-[family-name:var(--font-heading)] text-2xl font-bold text-navy tracking-[-0.03em]">
             Something Went Wrong
           </h1>
@@ -31,7 +42,12 @@ export default function Error({
             An unexpected error occurred. Please try again or contact us if the
             problem persists.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="mt-8 flex items-center justify-center gap-4"
+          >
             <button
               onClick={reset}
               className="inline-flex items-center rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-navy/90 hover:shadow-navy active:scale-[0.97]"
@@ -44,8 +60,8 @@ export default function Error({
             >
               Back to Home
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );

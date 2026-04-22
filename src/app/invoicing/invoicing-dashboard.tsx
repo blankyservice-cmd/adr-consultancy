@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   DollarSign,
   Send,
@@ -13,7 +14,6 @@ import {
   Trash2,
 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 interface InvoiceLineItem {
   id: string;
@@ -104,20 +104,16 @@ export function InvoicingDashboard() {
   const labelClass = "block text-sm font-medium text-navy mb-1.5";
 
   return (
-    <div className="min-h-screen bg-light-bg">
-      <nav className="bg-white border-b border-border">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link href="/">
-            <Image src="/logo.svg" alt="ADR Consultancy" width={180} height={40} />
-          </Link>
-          <span className="text-xs text-charcoal/40 hidden sm:block">Invoicing</span>
-        </div>
-      </nav>
-
+    <div className="bg-light-bg">
       <div className="mx-auto max-w-4xl px-6 py-12">
-        <div className="flex items-center gap-3 mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          className="flex items-center gap-3 mb-8"
+        >
           <Link
-            href="/"
+            href="/admin"
             className="inline-flex items-center gap-1 text-sm text-charcoal/50 hover:text-navy transition-colors"
           >
             <ArrowLeft size={14} />
@@ -130,10 +126,15 @@ export function InvoicingDashboard() {
               Send a professional invoice to your client via Stripe.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {!stripeConfigured && (
-          <div className="bg-gold/5 border border-gold/20 rounded-xl p-5 mb-8 flex items-start gap-3">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="bg-gold/5 border border-gold/20 rounded-xl p-5 mb-8 flex items-start gap-3"
+          >
             <AlertCircle size={18} className="text-gold mt-0.5 shrink-0" />
             <div>
               <p className="text-sm font-medium text-navy">Stripe Not Connected</p>
@@ -144,11 +145,18 @@ export function InvoicingDashboard() {
                 enable live invoicing. The form below will show you the invoice structure.
               </p>
             </div>
-          </div>
+          </motion.div>
         )}
 
+        <AnimatePresence mode="wait">
         {status === "success" ? (
-          <div className="bg-white rounded-2xl border border-border p-10 text-center">
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            className="bg-white rounded-2xl border border-border p-10 text-center"
+          >
             <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
               <CheckCircle2 size={32} className="text-green-600" />
             </div>
@@ -169,9 +177,15 @@ export function InvoicingDashboard() {
             >
               Create Another Invoice
             </button>
-          </div>
+          </motion.div>
         ) : (
-          <div className="space-y-6">
+          <motion.div
+            key="form"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
+            className="space-y-6"
+          >
             {/* Client Details */}
             <section className="bg-white rounded-2xl border border-border p-8">
               <div className="flex items-center gap-2 mb-5">
@@ -335,8 +349,9 @@ export function InvoicingDashboard() {
                 </>
               )}
             </button>
-          </div>
+          </motion.div>
         )}
+        </AnimatePresence>
       </div>
     </div>
   );

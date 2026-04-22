@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { motion } from "framer-motion";
 import {
   FileText,
   Download,
@@ -12,7 +13,6 @@ import {
   Plus,
   Trash2,
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 
 interface LineItem {
@@ -401,35 +401,37 @@ export function ProposalBuilder() {
   }
 
   return (
-    <div className="min-h-screen bg-light-bg">
-      <nav className="bg-white border-b border-border">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link href="/">
-            <Image src="/logo.svg" alt="ADR Consultancy" width={180} height={40} />
-          </Link>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setShowPreview(true)}
-              className="inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90 transition-colors"
-            >
-              <FileText size={16} />
-              Preview Proposal
-            </button>
-          </div>
-        </div>
-      </nav>
-
+    <div className="bg-light-bg">
       <div className="mx-auto max-w-4xl px-6 py-12">
-        <div className="mb-8">
-          <h1 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-navy tracking-[-0.03em]">
-            Proposal / SOW Builder
-          </h1>
-          <p className="mt-2 text-sm text-charcoal/50">
-            Fill in the details below and preview a professional proposal ready to print or save as PDF.
-          </p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          className="mb-8 flex items-center justify-between"
+        >
+          <div>
+            <h1 className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl font-bold text-navy tracking-[-0.03em]">
+              Proposal / SOW Builder
+            </h1>
+            <p className="mt-2 text-sm text-charcoal/50">
+              Fill in the details below and preview a professional proposal ready to print or save as PDF.
+            </p>
+          </div>
+          <button
+            onClick={() => setShowPreview(true)}
+            className="inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90 hover:shadow-lg transition-all duration-200 active:scale-[0.97]"
+          >
+            <FileText size={16} />
+            Preview
+          </button>
+        </motion.div>
 
-        <div className="space-y-8">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="space-y-8"
+        >
           {/* Client Information */}
           <section className="bg-white rounded-2xl border border-border p-8">
             <div className="flex items-center gap-2 mb-5">
@@ -788,7 +790,7 @@ export function ProposalBuilder() {
               </div>
             </div>
           </section>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
