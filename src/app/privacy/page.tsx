@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -9,16 +9,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="bg-white border-b border-border">
-        <div className="mx-auto max-w-3xl px-6 lg:px-8 py-4">
-          <Link href="/">
-            <Image src="/logo.svg" alt="ADR Consultancy" width={180} height={40} />
-          </Link>
-        </div>
-      </nav>
-
-      <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
+    <>
+      <Navbar />
+      <main className="pt-24 bg-white">
+        <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
         <h1 className="font-[family-name:var(--font-heading)] text-3xl font-bold text-navy tracking-[-0.03em] mb-2">
           Privacy Policy
         </h1>
@@ -173,15 +167,9 @@ export default function PrivacyPage() {
           </section>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border">
-          <Link
-            href="/"
-            className="text-sm font-medium text-gold hover:text-gold-dark transition-colors"
-          >
-            Back to Home
-          </Link>
         </div>
-      </div>
-    </div>
+      </main>
+      <Footer />
+    </>
   );
 }
