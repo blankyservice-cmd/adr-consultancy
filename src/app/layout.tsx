@@ -44,6 +44,64 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "ADR Consultancy",
+  url: "https://adrconsultancy.ca",
+  logo: "https://adrconsultancy.ca/logo.svg",
+  description:
+    "End-to-end AI solutions for small and medium businesses. Strategy, software, automation, marketing, training, and governance.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "info@adrconsultancy.ca",
+    contactType: "sales",
+    availableLanguage: ["English", "French"],
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/peter-miranda-4a4113215",
+  ],
+  areaServed: {
+    "@type": "Country",
+    name: "Canada",
+  },
+  knowsAbout: [
+    "Artificial Intelligence",
+    "AI Strategy",
+    "Workflow Automation",
+    "Software Development",
+    "Marketing Automation",
+    "AI Training",
+  ],
+};
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  provider: {
+    "@type": "Organization",
+    name: "ADR Consultancy",
+  },
+  serviceType: "AI Consulting",
+  areaServed: {
+    "@type": "Country",
+    name: "Canada",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "AI Consulting Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI Strategy & Consulting" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI-Powered Software Development" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Workflow Automation" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Marketing & Advertising AI" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sales Enablement AI" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI Training & Adoption" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "AI Governance & Compliance" } },
+    ],
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,6 +112,26 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(serviceJsonLd),
+          }}
+        />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="ADR Consultancy Blog"
+          href="/blog/rss.xml"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         {children}
         <Analytics />

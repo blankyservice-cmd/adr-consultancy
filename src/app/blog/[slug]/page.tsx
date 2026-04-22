@@ -41,8 +41,33 @@ export default async function BlogPostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "ADR Consultancy",
+      url: "https://adrconsultancy.ca",
+    },
+    mainEntityOfPage: `https://adrconsultancy.ca/blog/${post.slug}`,
+    keywords: post.tags.join(", "),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd),
+        }}
+      />
       <Navbar />
       <main className="pt-24">
         <BlogArticle post={post} />
