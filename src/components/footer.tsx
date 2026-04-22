@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Mail } from "lucide-react";
 
 function LinkedInIcon({ size = 16 }: { size?: number }) {
@@ -9,19 +10,23 @@ function LinkedInIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-const links = [
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Our Process", href: "#process" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+const quickLinks = [
+  { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Free Assessment", href: "/audit" },
+];
+
+const siteLinks = [
+  { label: "Our Process", href: "/#process" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export function Footer() {
   return (
     <footer className="bg-navy-gradient border-t border-white/10">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
             <Image
@@ -36,20 +41,39 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Links */}
+          {/* Quick Links */}
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">
-              Quick Links
+              Services
             </h4>
             <ul className="space-y-2">
-              {links.map((link) => (
+              {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-sm text-white/50 hover:text-gold transition-colors duration-200"
                   >
                     {link.label}
-                  </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Site Links */}
+          <div>
+            <h4 className="text-sm font-semibold text-white mb-4">
+              Company
+            </h4>
+            <ul className="space-y-2">
+              {siteLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/50 hover:text-gold transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -88,12 +112,12 @@ export function Footer() {
             reserved.
           </p>
           <div className="flex items-center gap-4">
-            <a href="/privacy" className="text-xs text-white/30 hover:text-gold transition-colors">
+            <Link href="/privacy" className="text-xs text-white/30 hover:text-gold transition-colors">
               Privacy Policy
-            </a>
-            <a href="/terms" className="text-xs text-white/30 hover:text-gold transition-colors">
+            </Link>
+            <Link href="/terms" className="text-xs text-white/30 hover:text-gold transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

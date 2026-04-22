@@ -1,28 +1,38 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Our Process", href: "#process" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Our Process", homeAnchor: "#process" },
+  { label: "About", homeAnchor: "#about" },
+  { label: "Contact", homeAnchor: "#contact" },
 ];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  function getHref(link: (typeof navLinks)[number]) {
+    // If the link has a dedicated page, always use it
+    if (link.href) return link.href;
+    // Anchor-only links: on homepage use #anchor, elsewhere use /#anchor
+    return isHome ? link.homeAnchor! : `/${link.homeAnchor}`;
+  }
 
   return (
     <nav
@@ -47,23 +57,37 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 hover:opacity-80 ${
-                  scrolled ? "text-navy" : "text-white"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
+            {navLinks.map((link) => {
+              const href = getHref(link);
+              const isAnchor = href.startsWith("#");
+              return isAnchor ? (
+                <a
+                  key={link.label}
+                  href={href}
+                  className={`text-sm font-medium transition-colors duration-200 hover:opacity-80 ${
+                    scrolled ? "text-navy" : "text-white"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  href={href}
+                  className={`text-sm font-medium transition-colors duration-200 hover:opacity-80 ${
+                    scrolled ? "text-navy" : "text-white"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+            <Link
+              href="/audit"
               className="inline-flex items-center rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-200 hover:bg-gold-dark hover:shadow-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold active:scale-[0.97]"
             >
-              Book a Call
-            </a>
+              Free Assessment
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -92,23 +116,36 @@ export function Navbar() {
             className="md:hidden bg-white/95 backdrop-blur-md border-t border-border overflow-hidden"
           >
             <div className="px-6 py-4 space-y-3">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block text-navy font-medium py-2 hover:text-blue transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
+              {navLinks.map((link) => {
+                const href = getHref(link);
+                const isAnchor = href.startsWith("#");
+                return isAnchor ? (
+                  <a
+                    key={link.label}
+                    href={href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block text-navy font-medium py-2 hover:text-blue transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.label}
+                    href={href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block text-navy font-medium py-2 hover:text-blue transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+              <Link
+                href="/audit"
                 onClick={() => setMobileOpen(false)}
                 className="block w-full text-center rounded-lg bg-gold px-5 py-3 text-sm font-semibold text-navy transition-all hover:bg-gold-dark active:scale-[0.97]"
               >
-                Book a Call
-              </a>
+                Free Assessment
+              </Link>
             </div>
           </motion.div>
         )}

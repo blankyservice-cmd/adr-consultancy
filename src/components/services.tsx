@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Compass,
   Code2,
@@ -78,6 +79,13 @@ export function Services() {
             Seven service pillars covering every stage of your AI journey --
             from strategy through deployment, marketing to training.
           </p>
+          <Link
+            href="/services"
+            className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-gold hover:text-gold-dark transition-colors"
+          >
+            View All Services & Pricing
+            <span className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
+          </Link>
         </motion.div>
 
         {/* Grid */}
@@ -114,7 +122,7 @@ export function Services() {
 
           {/* CTA card */}
           <motion.a
-            href="#contact"
+            href="/audit"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
