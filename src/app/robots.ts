@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/playbook", "/proposal", "/invoicing"],
+      disallow: ["/api/", "/admin", "/playbook", "/proposal", "/invoicing"],
     },
     sitemap: "https://adrconsultancy.ca/sitemap.xml",
   };

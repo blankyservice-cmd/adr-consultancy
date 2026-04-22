@@ -17,7 +17,7 @@ const quickLinks = [
 ];
 
 const siteLinks = [
-  { label: "Our Process", href: "/#process" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/#about" },
   { label: "Contact", href: "/#contact" },
 ];
