@@ -5,8 +5,6 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
-  Play,
-  Monitor,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -118,34 +116,7 @@ export function CaseStudyDetail({ slug }: { slug: string }) {
           </div>
         </motion.div>
 
-        {/* Video placeholder */}
-        {cs.videoPlaceholder && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mt-16"
-          >
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-navy tracking-[-0.02em] mb-6">
-              See It in Action
-            </h2>
-            <div className="relative aspect-video rounded-xl bg-navy/5 border border-border flex items-center justify-center overflow-hidden group cursor-pointer hover:bg-navy/8 transition-colors">
-              <div className="text-center">
-                <div className="mx-auto w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mb-3 group-hover:bg-gold/30 transition-colors">
-                  <Play size={28} className="text-gold ml-1" />
-                </div>
-                <p className="text-sm text-charcoal/50">
-                  Demo video coming soon
-                </p>
-              </div>
-              <div className="absolute top-4 right-4 flex items-center gap-1.5 text-xs text-charcoal/30">
-                <Monitor size={14} />
-                Walkthrough
-              </div>
-            </div>
-          </motion.div>
-        )}
+        {/* Video section -- hidden until real videos are available */}
 
         {/* Features */}
         <motion.div

@@ -14,11 +14,12 @@ const quickLinks = [
   { label: "Services", href: "/services" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Free Assessment", href: "/audit" },
+  { label: "AI Readiness Checklist", href: "/resources" },
 ];
 
 const siteLinks = [
   { label: "Blog", href: "/blog" },
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/#contact" },
 ];
 
