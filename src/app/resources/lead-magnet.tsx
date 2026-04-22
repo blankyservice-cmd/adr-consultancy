@@ -112,25 +112,26 @@ export function LeadMagnet() {
                     <CheckCircle2 size={32} className="text-green-500" />
                   </div>
                   <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-navy mb-3">
-                    Check your inbox!
+                    Your checklist is ready
                   </h3>
                   <p className="text-charcoal/60 mb-6">
-                    We have sent the AI Readiness Checklist to{" "}
-                    <strong className="text-navy">{form.email}</strong>. If you
-                    do not see it within a few minutes, check your spam folder.
+                    Thanks, {form.name}. Open the checklist below -- use your browser's Print function to save it as a PDF.
                   </p>
                   <div className="space-y-3">
+                    <a
+                      href="/ai-readiness-checklist.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 w-full rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy text-center transition-all hover:bg-gold-dark active:scale-[0.97]"
+                    >
+                      <Download size={16} />
+                      Open Checklist
+                    </a>
                     <Link
                       href="/audit"
-                      className="block w-full rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-navy text-center transition-all hover:bg-gold-dark active:scale-[0.97]"
-                    >
-                      Take the Full AI Assessment
-                    </Link>
-                    <Link
-                      href="/blog"
                       className="block w-full rounded-lg bg-navy/5 px-6 py-3 text-sm font-semibold text-navy text-center transition-all hover:bg-navy/10 active:scale-[0.97]"
                     >
-                      Read Our Blog
+                      Take the Full AI Assessment
                     </Link>
                   </div>
                 </div>

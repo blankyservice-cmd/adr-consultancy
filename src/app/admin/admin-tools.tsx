@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -8,6 +10,7 @@ import {
   BookOpen,
   ClipboardCheck,
   ArrowRight,
+  LogOut,
 } from "lucide-react";
 
 const tools = [
@@ -42,6 +45,15 @@ const tools = [
 ];
 
 export function AdminTools() {
+  const router = useRouter();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  async function handleLogout() {
+    setLoggingOut(true);
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.push("/login");
+  }
+
   return (
     <section className="py-16 sm:py-20 bg-white">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
@@ -61,6 +73,14 @@ export function AdminTools() {
             Quick access to internal tools. This page is not indexed by search
             engines.
           </p>
+          <button
+            onClick={handleLogout}
+            disabled={loggingOut}
+            className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-charcoal/40 hover:text-red-500 transition-colors disabled:opacity-50"
+          >
+            <LogOut size={13} />
+            {loggingOut ? "Signing out..." : "Sign out"}
+          </button>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

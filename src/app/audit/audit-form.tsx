@@ -14,7 +14,6 @@ import {
   Clock,
 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -206,16 +205,8 @@ export function AuditForm() {
 
   if (status === "success") {
     return (
-      <div className="min-h-screen bg-light-bg">
-        <nav className="bg-white border-b border-border">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
-            <Link href="/">
-              <Image src="/logo.svg" alt="ADR Consultancy" width={180} height={40} />
-            </Link>
-          </div>
-        </nav>
-
-        <div className="mx-auto max-w-2xl px-6 py-24 text-center">
+      <div className="min-h-[80vh] bg-light-bg flex items-center">
+        <div className="mx-auto max-w-2xl px-6 py-24 text-center w-full">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -266,18 +257,6 @@ export function AuditForm() {
 
   return (
     <div className="min-h-screen bg-light-bg">
-      {/* Top Nav */}
-      <nav className="bg-white border-b border-border">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4 flex items-center justify-between">
-          <Link href="/">
-            <Image src="/logo.svg" alt="ADR Consultancy" width={180} height={40} />
-          </Link>
-          <span className="text-xs text-charcoal/40 hidden sm:block">
-            Free AI Readiness Assessment
-          </span>
-        </div>
-      </nav>
-
       <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
         {/* Header */}
         <div className="text-center mb-10">
