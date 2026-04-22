@@ -96,6 +96,10 @@ export async function POST(request: NextRequest) {
     const resendKey = process.env.RESEND_API_KEY;
     const notifyEmail = process.env.NOTIFICATION_EMAIL;
     if (resendKey && notifyEmail) {
+      // Escape HTML to prevent XSS in email
+      const esc = (s: string) =>
+        s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
       try {
         await fetch("https://api.resend.com/emails", {
           method: "POST",
@@ -106,16 +110,16 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify({
             from: "ADR Consultancy <info@adrconsultancy.ca>",
             to: [notifyEmail],
-            subject: `New Lead: ${lead.name} from ${lead.company || "Unknown Company"}`,
+            subject: `New Lead: ${esc(lead.name)} from ${esc(lead.company || "Unknown Company")}`,
             html: `
               <h2>New Lead from ADR Consultancy Website</h2>
-              <p><strong>Name:</strong> ${lead.name}</p>
-              <p><strong>Email:</strong> ${lead.email}</p>
-              <p><strong>Company:</strong> ${lead.company || "Not provided"}</p>
-              <p><strong>Source:</strong> ${lead.source}</p>
+              <p><strong>Name:</strong> ${esc(lead.name)}</p>
+              <p><strong>Email:</strong> ${esc(lead.email)}</p>
+              <p><strong>Company:</strong> ${esc(lead.company || "Not provided")}</p>
+              <p><strong>Source:</strong> ${esc(lead.source)}</p>
               <p><strong>Message:</strong></p>
               <blockquote style="border-left: 3px solid #D4A574; padding-left: 12px; color: #555;">
-                ${lead.message}
+                ${esc(lead.message)}
               </blockquote>
               <p style="color: #999; font-size: 12px;">Received at ${lead.created_at}</p>
             `,
