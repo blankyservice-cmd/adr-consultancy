@@ -3,7 +3,7 @@ import { Hero } from "@/components/hero";
 import { Services } from "@/components/services";
 import { CaseStudies } from "@/components/case-studies";
 import { ConsultativeFramework } from "@/components/consultative-framework";
-import { Testimonials } from "@/components/testimonials";
+import { ProofOfWork } from "@/components/proof-of-work";
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
@@ -15,7 +15,7 @@ export default function Home() {
       <Hero />
       <Services />
       <CaseStudies />
-      <Testimonials />
+      <ProofOfWork />
       <ConsultativeFramework />
       <About />
       <Contact />
